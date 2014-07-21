@@ -1,3 +1,4 @@
 ---
 - include: ufw-firewall.yml
+- include: netctl-if.yml
 - include: dnsmasq.yml

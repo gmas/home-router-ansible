@@ -1,0 +1,25 @@
+- name: copy local interface config
+  sudo: yes
+  copy: src=eth0-local dest=/etc/netctl/eth0-local
+
+- name: copy external interface config
+  sudo: yes
+  copy: src=eth1-dhcp dest=/etc/netctl/eth1-dhcp
+
+- name: check if eth0 config is enabled
+  shell: if netctl is-enabled eth0-local &> /dev/null ; then echo yes; else echo no ; fi
+  register: eth0_enabled
+
+- name: check if eth1 config is enabled
+  shell: if netctl is-enabled eth1-dhcp &> /dev/null ; then echo yes; else echo no ; fi
+  register: eth1_enabled
+
+- name: enable eth0
+  sudo: yes
+  shell: netctl enable eth0-local
+  when: eth0_enabled.stdout == 'no'
+
+- name: enable eth1
+  sudo: yes
+  shell: netctl enable eth1-dhcp
+  when: eth1_enabled.stdout == 'no'
