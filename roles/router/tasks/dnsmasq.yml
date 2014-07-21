@@ -1,0 +1,12 @@
+- name: Install DNSmasq package
+  pacman: name=dnsmasq state=present
+
+- name: Ensure DNSmasq is running
+  sudo: yes
+  service: name=dnsmasq state=started
+
+- name: copy dnsmasq config
+  sudo: yes
+  copy: src=dnsmasq.conf dest=/etc/dnsmasq.conf
+  notify:
+    - "Restart_Dnsmasq"
