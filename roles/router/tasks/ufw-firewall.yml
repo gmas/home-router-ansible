@@ -1,0 +1,6 @@
+- name: pacman update
+  sudo: yes
+  pacman: update_cache=yes
+
+- name : Install UFW Firewall package
+  pacman: name=ufw state=present

@@ -1,0 +1,7 @@
+---
+- name: Router
+  hosts: [router]
+  sudo: yes
+  remote_user: gmas
+  roles:
+    - router
