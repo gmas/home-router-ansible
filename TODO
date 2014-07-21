@@ -1,0 +1,14 @@
+- setup wlan1 as AP
+- bridge eth0 and wlan1
+
+- change netctl config from eth0 to bridge
+
+- add OpeVNP client
+
+- change ufw with shorewall
+- remove ufw package from router
+- add shorewall configs
+
+- logrotate
+- peerGuardian for torrent ports
+- IPv6
