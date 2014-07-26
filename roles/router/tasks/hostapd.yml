@@ -1,0 +1,12 @@
+- name: Install hostapd package
+  pacman: name=hostapd state=present
+
+- name: Ensure hostapd is running
+  sudo: yes
+  service: name=hostapd state=started
+
+- name: copy hostapd config
+  sudo: yes
+  copy: src=hostapd.conf dest=/etc/hostapd/hostapd.conf
+  notify:
+    - "Restart_Hostapd"

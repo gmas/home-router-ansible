@@ -3,3 +3,6 @@
   sudo: yes
   service: name=dnsmasq state=restarted
 
+- name: "Restart_Hostapd"
+  sudo: yes
+  service: name=hostapd state=restarted
