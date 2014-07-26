@@ -3,3 +3,4 @@
 - include: netctl-if.yml
 - include: dnsmasq.yml
 - include: hostapd.yml
+- include: ip-forward.yml
