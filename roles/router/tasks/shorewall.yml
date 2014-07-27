@@ -1,0 +1,20 @@
+# - name: pacman update
+#   sudo: yes
+#   pacman: update_cache=yes
+
+- name : Install Shorewall Firewall package
+  pacman: name=shorewall state=present
+
+- name: sync shorewall configs
+  synchronize: src=shorewall dest=/etc
+  notify:
+    - "Restart_Shorewall"
+
+- name: Ensure shorewall is enabled
+  sudo: yes
+  service: name=shorewall enabled=yes
+
+- name: Ensure shorewall is running
+  sudo: yes
+  service: name=shorewall state=started
+

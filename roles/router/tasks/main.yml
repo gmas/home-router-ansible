@@ -1,6 +1,9 @@
 ---
-- include: ufw-firewall.yml
+- name : Install rsync 
+  pacman: name=rsync state=present
+
 - include: netctl-if.yml
 - include: dnsmasq.yml
 - include: hostapd.yml
 - include: ip-forward.yml
+- include: shorewall.yml

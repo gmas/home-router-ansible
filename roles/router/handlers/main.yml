@@ -6,3 +6,7 @@
 - name: "Restart_Hostapd"
   sudo: yes
   service: name=hostapd state=restarted
+
+- name: "Restart_Shorewall"
+  sudo: yes
+  service: name=shorewall state=restarted
