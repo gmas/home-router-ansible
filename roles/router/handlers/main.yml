@@ -10,3 +10,7 @@
 - name: "Restart_Shorewall"
   sudo: yes
   service: name=shorewall state=restarted
+
+- name: "Restart_Ddclient"
+  sudo: yes
+  service: name=ddclient state=restarted

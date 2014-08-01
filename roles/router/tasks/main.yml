@@ -7,3 +7,4 @@
 - include: hostapd.yml
 - include: ip-forward.yml
 - include: shorewall.yml
+- include: ddclient.yml
