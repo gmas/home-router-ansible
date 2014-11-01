@@ -8,3 +8,4 @@
 - include: ip-forward.yml
 - include: shorewall.yml
 - include: ddclient.yml
+- include: hosts.yml
