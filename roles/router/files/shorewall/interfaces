@@ -15,4 +15,4 @@
 ###############################################################################
 #ZONE	INTERFACE	OPTIONS
 net     eth1            dhcp,tcpflags,nosmurfs,routefilter,logmartians,sourceroute=0
-loc     br0             dhcp,tcpflags,nosmurfs,routefilter,logmartians,sourceroute=0
+loc     br0             dhcp,tcpflags,nosmurfs,routefilter,logmartians,routeback=1
