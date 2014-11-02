@@ -18,6 +18,11 @@ loc		net		ACCEPT
 loc   all   ACCEPT
 #loc		$FW   ACCEPT
 net		all		DROP		info
+
+#vpn
+$FW   vpn		ACCEPT
+vpn   loc   ACCEPT
+vpn   $FW   ACCEPT
 # THE FOLLOWING POLICY MUST BE LAST
 all		all		REJECT		info
 
