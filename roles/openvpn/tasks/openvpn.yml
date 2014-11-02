@@ -1,0 +1,13 @@
+- name: Install openvn package
+  pacman: name=openvpn state=present
+
+- name: copy openvpn server config
+  sudo: yes
+  copy: src=openvpn/server.conf dest=/etc/openvpn/server.conf
+  notify:
+    - "Restart_Openvpn"
+
+- name: Ensure openvpn is running
+  sudo: yes
+  service: name=openvpn@server state=started
+

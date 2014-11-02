@@ -1,0 +1,6 @@
+- name: oVpn 
+  hosts: [ovpn]
+  sudo: yes
+  remote_user: ansible
+  roles:
+    - openvpn

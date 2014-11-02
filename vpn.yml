@@ -1,7 +1,0 @@
----
-- name: Vpn 
-  hosts: [vpn]
-  sudo: yes
-  remote_user: gmas
-  roles:
-    - vpn
