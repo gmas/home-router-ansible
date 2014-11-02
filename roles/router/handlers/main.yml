@@ -14,3 +14,7 @@
 - name: "Restart_Ddclient"
   sudo: yes
   service: name=ddclient state=restarted
+
+- name: "Restart_Openvpn"
+  sudo: yes
+  service: name=openvpn@client state=restarted

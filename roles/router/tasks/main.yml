@@ -9,3 +9,4 @@
 - include: shorewall.yml
 - include: ddclient.yml
 - include: hosts.yml
+- include: openvpn.yml
