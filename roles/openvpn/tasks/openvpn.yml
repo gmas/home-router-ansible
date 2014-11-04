@@ -1,9 +1,20 @@
 - name: Install openvn package
   pacman: name=openvpn state=present
 
+
+- name: create OpenVPN ccd directory
+  sudo: yes
+  file: path=/etc/openvpn/ccd state=directory owner=root
+
 - name: copy openvpn server config
   sudo: yes
   copy: src=openvpn/server.conf dest=/etc/openvpn/server.conf
+  notify:
+    - "Restart_Openvpn"
+
+- name: copy openvpn LAN routes config 
+  sudo: yes
+  copy: src=openvpn/ccd/archrouter dest=/etc/openvpn/ccd/archrouter
   notify:
     - "Restart_Openvpn"
 
