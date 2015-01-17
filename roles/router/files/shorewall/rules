@@ -46,4 +46,7 @@ Ping(DROP)	net		$FW
 
 ACCEPT		$FW		loc		icmp
 ACCEPT		$FW		net		icmp
+
+DNAT    net     loc:192.168.20.80 tcp     54372
+DNAT    net     loc:192.168.20.80 udp     54372
 #
