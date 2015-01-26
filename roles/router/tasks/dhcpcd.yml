@@ -1,0 +1,7 @@
+- name : Install dhcpcd package
+  pacman: name=dhcpcd state=present
+
+- name: sync dhcpcd hooks
+  synchronize: src=dhcpcd/hooks/31-info dest=/usr/lib/dhcpcd/dhcpcd-hooks/31-info
+  notify:
+    - "Restart_Netctl_eth1"

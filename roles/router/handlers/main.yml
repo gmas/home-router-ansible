@@ -18,3 +18,6 @@
 - name: "Restart_Openvpn"
   sudo: yes
   service: name=openvpn@client state=restarted
+- name: "Restart_Netctl_eth1"
+  sudo: yes
+  raw: /usr/bin/netctl restart eth1-dhcp
