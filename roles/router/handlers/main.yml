@@ -15,9 +15,14 @@
   sudo: yes
   service: name=ddclient state=restarted
 
-- name: "Restart_Openvpn"
+- name: "Restart_Openvpn_Client"
   sudo: yes
   service: name=openvpn@client state=restarted
+
+- name: "Restart_Openvpn_AirVpn"
+  sudo: yes
+  service: name=openvpn@airvpn_europe state=restarted
+
 - name: "Restart_Netctl_eth1"
   sudo: yes
   raw: /usr/bin/netctl restart eth1-dhcp

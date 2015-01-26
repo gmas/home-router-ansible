@@ -1,13 +1,34 @@
-- name: Install openvn package
+- name: Install openvpn package
   pacman: name=openvpn state=present
 
 - name: copy openvpn client config
   sudo: yes
   copy: src=openvpn/client.conf dest=/etc/openvpn/client.conf
   notify:
-    - "Restart_Openvpn"
-
+    - "Restart_Openvpn_Client"
 - name: Ensure openvpn is running
   sudo: yes
   service: name=openvpn@client state=started
+
+
+#FIXME 
+#permissions are way too open, gateway can be hijacked
+- name: create tun1 lease info file 
+  file: path=/var/lib/dhcpcd/dhcpcd-tun1.info owner=root group=root mode=0666 state=touch
+
+- name: copy openvpn AirVpn client config
+  sudo: yes
+  copy: src=openvpn/save_gateway.rb dest=/etc/openvpn/save_gateway.rb
+
+- name: copy openvpn AirVpn client config
+  sudo: yes
+  copy: src=openvpn/airvpn_europe.conf dest=/etc/openvpn/airvpn_europe.conf
+  notify:
+    - "Restart_Openvpn_AirVpn"
+
+- name: Ensure Airvpn is running
+  sudo: yes
+  service: name=openvpn@airvpn_europe state=started
+  notify:
+    - "Restart_Shorewall"
 
