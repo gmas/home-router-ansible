@@ -11,3 +11,4 @@
 - include: hosts.yml
 - include: openvpn.yml
 - include: dhcpcd.yml
+- include: ssh.yml

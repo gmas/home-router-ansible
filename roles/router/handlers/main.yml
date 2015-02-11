@@ -26,3 +26,7 @@
 - name: "Restart_Netctl_eth1"
   sudo: yes
   raw: /usr/bin/netctl restart eth1-dhcp
+
+- name: "Restart_Sshd"
+  sudo: yes
+  service: name=sshd state=restarted
