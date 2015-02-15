@@ -5,3 +5,4 @@
   synchronize: src=dhcpcd/hooks/31-info dest=/usr/lib/dhcpcd/dhcpcd-hooks/31-info
   notify:
     - "Restart_Netctl_eth1"
+    - "Restart_Shorewall"

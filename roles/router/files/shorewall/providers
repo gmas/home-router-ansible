@@ -7,5 +7,5 @@
 #
 ############################################################################################
 #NAME   NUMBER  MARK    DUPLICATE       INTERFACE       GATEWAY         OPTIONS         COPY
-twc     1       1       -               eth1            detect          track           -
+twc     1       1       -               eth1            detect          track,nohostroute -
 airvpn  2       2       -               tun1            detect          loose,track     -
