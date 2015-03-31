@@ -6,3 +6,9 @@
   notify:
     - "Restart_Netctl_eth1"
     - "Restart_Shorewall"
+
+- name: sync dhcpcd.conf
+  synchronize: src=dhcpcd/dhcpcd.conf dest=/etc/dhcpcd.conf
+  notify:
+    - "Restart_Netctl_eth1"
+    - "Restart_Shorewall"
