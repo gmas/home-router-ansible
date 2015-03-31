@@ -5,5 +5,5 @@
 gateway = ARGF.argv[3]
 File.open("/var/lib/dhcpcd/dhcpcd-tun1.info", "r+") do |f|
   f.truncate(0)
-  f.write "GATEWAYS=#{gateway}\r\n"
+  f.write "GATEWAYS=#{gateway}"
 end
