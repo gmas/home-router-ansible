@@ -11,10 +11,12 @@
   service: name=openvpn@client state=started
 
 
-#FIXME 
-#permissions are way too open, gateway can be hijacked
+- shell: stat -c %a /var/lib/dhcpcd/dhcpcd-tun1.info
+  register: dhcpcd_tun1
+  changed_when: False
 - name: create tun1 lease info file 
   file: path=/var/lib/dhcpcd/dhcpcd-tun1.info owner=root group=root mode=0664 state=touch
+  when: dhcpcd_tun1.stdout != "664"
 
 - name: copy openvpn AirVpn client config
   sudo: yes
