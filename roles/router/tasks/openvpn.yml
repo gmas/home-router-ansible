@@ -14,7 +14,7 @@
 #FIXME 
 #permissions are way too open, gateway can be hijacked
 - name: create tun1 lease info file 
-  file: path=/var/lib/dhcpcd/dhcpcd-tun1.info owner=root group=root mode=0666 state=touch
+  file: path=/var/lib/dhcpcd/dhcpcd-tun1.info owner=root group=root mode=0664 state=touch
 
 - name: copy openvpn AirVpn client config
   sudo: yes
