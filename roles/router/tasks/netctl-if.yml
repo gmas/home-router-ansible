@@ -2,11 +2,12 @@
   sudo: yes
   copy: src=br0 dest=/etc/netctl/br0
 
-- name: check if br0 config is enabled
-  shell: if netctl is-enabled br0 &> /dev/null ; then echo yes; else echo no ; fi
+- shell: netctl is-enabled br0
   register: br0_enabled
+  changed_when: False
+  ignore_errors: True
 
 - name: enable br0
   sudo: yes
   shell: netctl enable br0
-  when: br0_enabled.stdout == 'no'
+  when: br0_enabled|failed
