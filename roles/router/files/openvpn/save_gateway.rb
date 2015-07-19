@@ -7,3 +7,7 @@ File.open("/var/lib/dhcpcd/dhcpcd-tun1.info", "r+") do |f|
   f.truncate(0)
   f.write "GATEWAYS=#{gateway}"
 end
+
+# reload shorewall
+system("/usr/bin/shorewall restart")
+
