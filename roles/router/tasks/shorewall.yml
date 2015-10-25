@@ -6,7 +6,7 @@
   pacman: name=shorewall state=present
 
 - name: sync shorewall configs
-  synchronize: src=shorewall dest=/etc
+  synchronize: src=shorewall/ dest=/etc/shorewall/
   notify:
     - "Restart_Shorewall"
 
