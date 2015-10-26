@@ -1,19 +1,13 @@
 #
-# Shorewall version 4.0 - Sample Masq file for two-interface configuration.
-# Copyright (C) 2006-2014 by the Shorewall Team
+# Shorewall - Masq file
 #
-# This library is free software; you can redistribute it and/or
-# modify it under the terms of the GNU Lesser General Public
-# License as published by the Free Software Foundation; either
-# version 2.1 of the License, or (at your option) any later version.
-#
-# See the file README.txt for further details.
-#------------------------------------------------------------------------------
 # For information about entries in this file, type "man shorewall-masq"
-################################################################################################################
-#INTERFACE:DEST		SOURCE		ADDRESS		PROTO	PORT(S)	IPSEC	MARK	USER/	SWITCH	ORIGINAL
-#											GROUP		DEST
-eth1 	192.168.20.0/24
-tun0  192.168.20.0/24
-tun1  192.168.20.0/24
-
+#
+# The manpage is also online at
+# http://www.shorewall.net/manpages/shorewall-masq.html
+#
+###################################################################################################################################
+#INTERFACE:DEST		SOURCE		ADDRESS		PROTO	PORT(S)	IPSEC	MARK	USER/	SWITCH	ORIGINAL PROBABILITY  GROUP  DEST
+eth1				192.168.20.0/24
+tun0				192.168.20.0/24
+tun1				192.168.20.0/24

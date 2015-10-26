@@ -1,4 +1,4 @@
-#       $OpenBSD: sshd_config,v 1.93 2014/01/10 05:59:19 djm Exp $
+#	$OpenBSD: sshd_config,v 1.97 2015/08/06 14:53:21 deraadt Exp $
 
 # This is the sshd server system-wide configuration file.  See
 # sshd_config(5) for more information.
@@ -41,7 +41,7 @@
 # Authentication:
 
 #LoginGraceTime 2m
-PermitRootLogin no
+PermitRootLogin prohibit-password
 #StrictModes yes
 #MaxAuthTries 6
 #MaxSessions 10
@@ -51,7 +51,7 @@ PermitRootLogin no
 
 # The default is to check both .ssh/authorized_keys and .ssh/authorized_keys2
 # but this is overridden so installations will only check .ssh/authorized_keys
-AuthorizedKeysFile      .ssh/authorized_keys
+AuthorizedKeysFile	.ssh/authorized_keys
 
 #AuthorizedPrincipalsFile none
 
@@ -107,12 +107,12 @@ PrintMotd no # pam does that
 #PrintLastLog yes
 #TCPKeepAlive yes
 #UseLogin no
-UsePrivilegeSeparation sandbox          # Default for new installations.
+UsePrivilegeSeparation sandbox		# Default for new installations.
 #PermitUserEnvironment no
 #Compression delayed
 #ClientAliveInterval 0
 #ClientAliveCountMax 3
-#UseDNS yes
+#UseDNS no
 #PidFile /run/sshd.pid
 #MaxStartups 10:30:100
 #PermitTunnel no
@@ -123,11 +123,11 @@ UsePrivilegeSeparation sandbox          # Default for new installations.
 #Banner none
 
 # override default of no subsystems
-Subsystem       sftp    /usr/lib/ssh/sftp-server
+Subsystem	sftp	/usr/lib/ssh/sftp-server
 
 # Example of overriding settings on a per-user basis
 #Match User anoncvs
-#       X11Forwarding no
-#       AllowTcpForwarding no
-#       PermitTTY no
-#       ForceCommand cvs server
+#	X11Forwarding no
+#	AllowTcpForwarding no
+#	PermitTTY no
+#	ForceCommand cvs server
