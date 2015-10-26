@@ -1,19 +1,14 @@
 #
-# Shorewall version 4.0 - Sample Zones File for two-interface configuration.
-# Copyright (C) 2006-2014 by the Shorewall Team
+# Shorewall - Zones File
 #
-# This library is free software; you can redistribute it and/or
-# modify it under the terms of the GNU Lesser General Public
-# License as published by the Free Software Foundation; either
-# version 2.1 of the License, or (at your option) any later version.
+# For information about this file, type "man shorewall-zones"
 #
-# See the file README.txt for further details.
-#------------------------------------------------------------------------------
-# For information about entries in this file, type "man shorewall-zones"
+# The manpage is also online at
+# http://www.shorewall.net/manpages/shorewall-zones.html
+#
 ###############################################################################
-#ZONE	TYPE	OPTIONS			IN			OUT
-#					OPTIONS			OPTIONS
-fw	firewall
-net	ipv4
-loc	ipv4
-vpn ipv4
+#ZONE     TYPE      OPTIONS   IN      OUT
+fw        firewall
+net       ipv4
+loc       ipv4
+vpn       ipv4
