@@ -4,14 +4,14 @@
 # Copy VPN configs
 - name: copy openvpn client config
   sudo: yes
-  copy: src="../../files/openvpn/client.conf" 
+  copy: src="openvpn/client.conf" 
         dest=/etc/openvpn/client.conf
   notify:
     - "Restart_Openvpn_Client"
 
 - name: copy openvpn AirVpn client config
   sudo: yes
-  copy: src="../../files/openvpn/airvpn_europe.conf" 
+  copy: src="openvpn/airvpn_europe.conf" 
         dest=/etc/openvpn/airvpn_europe.conf
   notify:
     - "Restart_Openvpn_AirVpn"

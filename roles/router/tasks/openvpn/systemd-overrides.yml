@@ -2,7 +2,7 @@
 
 - name: copy openvpn systemd client override 
   sudo: yes
-  copy: src="../../files/openvpn/systemd-overrides/client-service-override.conf" 
+  copy: src="openvpn/systemd-overrides/client-service-override.conf" 
         dest=/etc/systemd/system/openvpn@client.service.d/override.conf
   notify:
     - "Restart_Openvpn_Client"
