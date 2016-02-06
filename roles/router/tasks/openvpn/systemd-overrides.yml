@@ -1,14 +1,14 @@
 # Copy systemd overrides
 
 - name: copy openvpn systemd client override 
-  sudo: yes
-  copy: src="../../files/openvpn/systemd-overrides/client-service-override.conf" 
+  become: yes
+  copy: src="openvpn/systemd-overrides/client-service-override.conf" 
         dest=/etc/systemd/system/openvpn@client.service.d/override.conf
   notify:
     - "Restart_Openvpn_Client"
 
 #- name: copy openvpn systemd airvpn override 
-#  sudo: yes
+#  become: yes
 #  copy: src="../../files/openvpn/systemd-overrides/airvpn-service-override.conf" 
 #        dest=/etc/systemd/system/openvpn@airvpn.service.d/override.conf
 #  notify:

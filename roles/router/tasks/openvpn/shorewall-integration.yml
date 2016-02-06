@@ -1,7 +1,7 @@
 # Generates /var/lib/dhcpcd/dhcpcd-tun1.info when connecting
 - name: copy openvpn OpenVPN gateway script
-  sudo: yes
-  copy: src="../../files/openvpn/save_gateway.rb" 
+  become: yes
+  copy: src="openvpn/save_gateway.rb" 
         dest=/etc/openvpn/save_gateway.rb
 
 # Used by Shorewall to determine VPN gateway
@@ -16,8 +16,8 @@
 
 # Copy override Shorewall configs requiring Openvpn services
 - name: copy shorewall service override configs
-  sudo: yes
-  copy: src="../../files/openvpn/systemd-overrides/shorewall-service-override.conf"
+  become: yes
+  copy: src="openvpn/systemd-overrides/shorewall-service-override.conf"
         dest=/etc/systemd/system/shorewall.service.d/override.conf
   notify:
     - "Restart_Shorewall"

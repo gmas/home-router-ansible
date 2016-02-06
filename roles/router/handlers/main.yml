@@ -1,32 +1,32 @@
 ---
 - name: "Restart_Dnsmasq"
-  sudo: yes
+  become: yes
   service: name=dnsmasq state=restarted
 
 - name: "Restart_Hostapd"
-  sudo: yes
+  become: yes
   service: name=hostapd state=restarted
 
 - name: "Restart_Shorewall"
-  sudo: yes
+  become: yes
   service: name=shorewall state=restarted
 
 - name: "Restart_Ddclient"
-  sudo: yes
+  become: yes
   service: name=ddclient state=restarted
 
 - name: "Restart_Openvpn_Client"
-  sudo: yes
+  become: yes
   service: name=openvpn@client state=restarted
 
 - name: "Restart_Openvpn_AirVpn"
-  sudo: yes
+  become: yes
   service: name=openvpn@airvpn_europe state=restarted
 
 - name: "Restart_Netctl_eth1"
-  sudo: yes
+  become: yes
   raw: /usr/bin/netctl restart eth1-dhcp
 
 - name: "Restart_Sshd"
-  sudo: yes
+  become: yes
   service: name=sshd state=restarted
