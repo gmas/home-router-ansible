@@ -1,0 +1,3 @@
+- name: copy NAS mount systemd unit
+  become: yes
+  copy: src=home-gmas-nas.mount dest=/etc/systemd/system/home-gmas-nas.mount
