@@ -2,11 +2,11 @@
   pacman: name=hostapd state=present
 
 - name: Ensure hostapd is running
-  sudo: yes
+  become: yes
   service: name=hostapd state=started
 
 - name: copy hostapd config
-  sudo: yes
+  become: yes
   copy: src=hostapd.conf dest=/etc/hostapd/hostapd.conf
   notify:
     - "Restart_Hostapd"

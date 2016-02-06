@@ -1,5 +1,5 @@
 - name: copy bridge interface config
-  sudo: yes
+  become: yes
   copy: src=br0 dest=/etc/netctl/br0
 
 - shell: netctl is-enabled br0
@@ -8,6 +8,6 @@
   ignore_errors: True
 
 - name: enable br0
-  sudo: yes
+  become: yes
   shell: netctl enable br0
   when: br0_enabled|failed

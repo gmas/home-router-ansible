@@ -2,11 +2,11 @@
   pacman: name=ddclient state=present
 
 - name: Ensure ddclient is running
-  sudo: yes
+  become: yes
   service: name=ddclient state=started
 
 - name: copy ddclient config
-  sudo: yes
+  become: yes
   copy: src=ddclient.conf dest=/etc/ddclient/ddclient.conf
   notify:
     - "Restart_Ddclient"
