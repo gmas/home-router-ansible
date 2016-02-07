@@ -10,7 +10,8 @@
 # information.
 #
 ###############################################################################
-#ACTION   SOURCE      DEST    PROTO DEST  SOURCE
-#               PORT(S) PORT(S)
-ACCEPT    eth1        -
-ACCEPT    -           eth1
+#ACTION         SOURCE                  DEST            PROTO   DEST    SOURCE
+#                                                               PORT(S) PORT(S)
+#
+ACCEPT          eth1                    -
+ACCEPT          -                       eth1
