@@ -7,7 +7,7 @@
 
 - name: sync shorewall configs
   become: yes
-  synchronize: src=shorewall/ dest=/etc/shorewall/ archive=no
+  copy: src=shorewall/ dest=/etc/shorewall/ owner=root
   notify:
     - "Restart_Shorewall"
 

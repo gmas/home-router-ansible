@@ -1,7 +1,6 @@
 ---
 - name: Router
   hosts: [router]
-  become: yes
   remote_user: gmas
   roles:
     - router
