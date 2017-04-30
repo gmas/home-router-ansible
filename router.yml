@@ -2,6 +2,8 @@
 - name: Router
   hosts: [router]
   become: yes
-  remote_user: gmas
+  vars:
+  - ansible_ssh_user: gmas
   roles:
     - router
+    - common

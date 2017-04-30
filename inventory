@@ -1,0 +1,9 @@
+[router]
+#192.168.0.10
+#23.242.90.210
+home.masgras.us
+
+[raspberrypi]
+nas.home.masgras.us
+lights.home.masgras.us
+192.168.20.253
