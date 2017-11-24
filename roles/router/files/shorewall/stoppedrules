@@ -1,5 +1,5 @@
 #
-# Shorewall - Stopped Rules File
+# Shorewall -- /etc/shorewall/stoppedrules
 #
 # For information about entries in this file, type "man shorewall-stoppedrules"
 #
@@ -10,8 +10,6 @@
 # information.
 #
 ###############################################################################
-#ACTION         SOURCE                  DEST            PROTO   DEST    SOURCE
-#                                                               PORT(S) PORT(S)
-#
-ACCEPT          eth1                    -
-ACCEPT          -                       eth1
+#ACTION		SOURCE			DEST		PROTO	DPORT	SPORT
+ACCEPT		eth1			-
+ACCEPT		-			eth1
