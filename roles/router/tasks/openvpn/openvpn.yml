@@ -9,12 +9,12 @@
   notify:
     - "Restart_Openvpn_Client"
 
-- name: copy openvpn AirVpn client config
-  become: yes
-  copy: src="openvpn/airvpn_europe.conf" 
-        dest=/etc/openvpn/airvpn_europe.conf
-  notify:
-    - "Restart_Openvpn_AirVpn"
+# - name: copy openvpn AirVpn client config
+#   become: yes
+#   copy: src="openvpn/airvpn_europe.conf" 
+#         dest=/etc/openvpn/airvpn_europe.conf
+#   notify:
+#     - "Restart_Openvpn_AirVpn"
 
 # Start VPN clients
 - name: Ensure openvpn is running
@@ -23,11 +23,11 @@
   notify:
     - "Restart_Shorewall"
 
-- name: Ensure Airvpn is running
-  become: yes
-  service: name=openvpn@airvpn_europe state=started
-  notify:
-    - "Restart_Shorewall"
+# - name: Ensure Airvpn is running
+#   become: yes
+#   service: name=openvpn@airvpn_europe state=started
+#   notify:
+#     - "Restart_Shorewall"
 
 - include: shorewall-integration.yml
 - include: systemd-overrides.yml
