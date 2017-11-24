@@ -1,5 +1,5 @@
 #
-# Shorewall - Policy File
+# Shorewall -- /etc/shorewall/policy
 #
 # For information about entries in this file, type "man shorewall-policy"
 #
@@ -7,18 +7,17 @@
 # http://www.shorewall.net/manpages/shorewall-policy.html
 #
 ###############################################################################
-
-#SOURCE   DEST    POLICY     LOG    BURST:LIMIT
-$FW       net     ACCEPT
-loc       net     ACCEPT
-loc       all     ACCEPT
-#loc      $FW     ACCEPT
-net       all     DROP       info
+#SOURCE		DEST		POLICY	LOGLEVEL	RATE	CONNLIMIT
+$FW			net		ACCEPT
+loc			net		ACCEPT
+loc			all		ACCEPT
+#loc			$FW		ACCEPT
+net			all		DROP	info
 
 #vpn
-$FW       vpn     ACCEPT
-vpn       loc     ACCEPT
-vpn       $FW     ACCEPT
-# THE FOLLOWING POLICY MUST BE LAST
-all       all     REJECT    info
+$FW			vpn		ACCEPT
+vpn			loc		ACCEPT
+vpn			$FW		ACCEPT
+# THE FOLLOWING 	POLICY MUST BE LAST
+all			all		REJECT	info
 

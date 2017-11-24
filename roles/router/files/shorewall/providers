@@ -1,11 +1,11 @@
 #
-# Shorewall version 4 - Providers File
+# Shorewall -- /etc/shorewall/providers
 #
 # For information about entries in this file, type "man shorewall-providers"
 #
 # For additional information, see http://shorewall.net/MultiISP.html
 #
 ############################################################################################
-#NAME   NUMBER  MARK    DUPLICATE       INTERFACE       GATEWAY         OPTIONS         COPY
-twc     1       1       -               eth1            detect          track,nohostroute -
-airvpn  2       2       -               tun1            detect          loose,track     -
+#NAME	NUMBER	MARK	DUPLICATE	INTERFACE	GATEWAY		OPTIONS		COPY
+twc	1	1	-		eth1		detect		nohostroute	-
+#airvpn 2	2	-		tun1		detect		loose		-

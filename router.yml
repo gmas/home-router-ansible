@@ -5,5 +5,5 @@
   vars:
   - ansible_ssh_user: gmas
   roles:
-    - router
     - common
+    - router
