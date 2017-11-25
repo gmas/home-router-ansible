@@ -1,33 +1,52 @@
+- name: decrypt secrets file
+  include_vars: "secrets.yml"
+  no_log: true
+
 - name: Install openvpn package
   pacman: name=openvpn state=present
 
-# Copy VPN configs
-- name: copy openvpn client config
-  become: yes
-  copy: src="openvpn/client.conf" 
-        dest=/etc/openvpn/client.conf
-  notify:
-    - "Restart_Openvpn_Client"
+- name: create openvpn client config directory
+  file:
+    path: "/etc/openvpn/client/"
+    owner: root
+    group: root
+    mode: 0600
+    state: directory
 
-- name: copy openvpn AirVpn client config
-  become: yes
-  copy: src="openvpn/airvpn_europe.conf" 
-        dest=/etc/openvpn/airvpn_europe.conf
-  notify:
-    - "Restart_Openvpn_AirVpn"
 
-# Start VPN clients
-- name: Ensure openvpn is running
+# Copy Client VPN configs
+- name: copy openvpn [{{item}}] client config
   become: yes
-  service: name=openvpn@client state=started
+  copy: src="openvpn/{{item}}.conf"
+        dest="/etc/openvpn/client/{{item}}.conf"
   notify:
-    - "Restart_Shorewall"
+    - "Restart_Openvpn_{{item}}"
+  with_items:
+  - walle
+  - tz_rom
 
-- name: Ensure Airvpn is running
+
+# TZ VPN config
+- file:
+    path: /etc/openvpn/tz_rom
+    owner: root
+    group: root
+    mode: 0600
+    state: directory
+
+- name: copy Tz_Rom client secrets
   become: yes
-  service: name=openvpn@airvpn_europe state=started
+  template: src="openvpn/tz_rom-{{ item }}.j2"
+        dest="/etc/openvpn/tz_rom/{{ item }}"
+  with_items:
+  - pass.txt
+  - ca.crt
   notify:
-    - "Restart_Shorewall"
+    - "Restart_Openvpn_tz_rom"
 
+# Shorewall/SystemD integration
 - include: shorewall-integration.yml
-- include: systemd-overrides.yml
+- include: systemd-overrides.yml connection="{{item}}"
+  with_items:
+  - walle
+  - tz_rom

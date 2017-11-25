@@ -15,13 +15,13 @@
   become: yes
   service: name=ddclient state=restarted
 
-- name: "Restart_Openvpn_Client"
+- name: "Restart_Openvpn_walle"
   become: yes
-  service: name=openvpn@client state=restarted
+  service: name=openvpn-client@walle.service enabled=yes state=restarted
 
-- name: "Restart_Openvpn_AirVpn"
+- name: "Restart_Openvpn_tz_rom"
   become: yes
-  service: name=openvpn@airvpn_europe state=restarted
+  service: name=openvpn-client@tz_rom.service enabled=yes state=restarted
 
 - name: "Restart_Netctl_eth1"
   become: yes
@@ -30,3 +30,6 @@
 - name: "Restart_Sshd"
   become: yes
   service: name=sshd state=restarted
+
+- name: "Reload_Systemd"
+  systemd: daemon_reload=yes
