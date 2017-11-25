@@ -1,4 +1,8 @@
 ---
+- name: pacman update
+  become: yes
+  pacman: update_cache=yes
+
 - name : Install rsync 
   pacman: name=rsync state=present
 

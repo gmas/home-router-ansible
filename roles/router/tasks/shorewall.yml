@@ -1,7 +1,3 @@
-- name: pacman update
-  become: yes
-  pacman: update_cache=yes
-
 - name : Install Shorewall Firewall package
   pacman: name=shorewall state=present
 
