@@ -9,5 +9,5 @@
 #SOURCE			DEST			PROVIDER	PRIORITY	MASK
 #adding rules after priority 999 (lookup main) in order to not affect routing to local or other tun
 lo			-			twc		1000
-#192.168.20.80		-			airvpn		11000
+192.168.20.80		-			tz_rom		11000
 br0			-			twc		11001
