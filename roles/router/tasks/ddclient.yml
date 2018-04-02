@@ -3,7 +3,7 @@
 
 - name: Ensure ddclient is running
   become: yes
-  service: name=ddclient state=started
+  service: name=ddclient state=started enabled=yes
 
 - name: copy ddclient config
   become: yes

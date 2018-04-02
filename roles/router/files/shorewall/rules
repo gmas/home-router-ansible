@@ -50,3 +50,5 @@ ACCEPT		$FW		net		icmp
 #Port forwarding
 DNAT		net		loc:192.168.20.81 tcp	8080
 DNAT		loc		loc:192.168.20.81 tcp	8080
+
+DROP		loc:192.168.20.128/27		net:eth1

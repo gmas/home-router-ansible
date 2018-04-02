@@ -12,5 +12,5 @@
 #ZONE		INTERFACE		OPTIONS
 net		eth1			dhcp,tcpflags,nosmurfs,rpfilter,logmartians,sourceroute=0
 loc		br0 	 	 	dhcp,tcpflags,nosmurfs,routefilter,logmartians,routeback=1
-vpn		tun0			dhcp,tcpflags,nosmurfs,routefilter,logmartians,sourceroute=0
-net		tun1			tcpflags,nosmurfs,rpfilter,logmartians,sourceroute=0,optional
+vpn		tun1			dhcp,tcpflags,nosmurfs,routefilter,logmartians,sourceroute=0
+net		tun0			tcpflags,nosmurfs,rpfilter,logmartians,sourceroute=0,optional

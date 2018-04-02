@@ -1,9 +1,9 @@
 - name: Install hostapd package
   pacman: name=hostapd state=present
 
-- name: Ensure hostapd is running
+- name: Ensure hostapd is stopped
   become: yes
-  service: name=hostapd state=started
+  service: name=hostapd state=stopped
 
 - name: copy hostapd config
   become: yes
