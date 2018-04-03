@@ -1,0 +1,28 @@
+---
+- name: Google cloud APT key
+  become: yes
+  apt_key:
+    url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+    state: present
+
+- name: apt update
+  become: yes
+  apt:
+    update_cache: yes
+
+- name: add rock64 to sudoers
+  become: yes
+  copy: src=sudoers-rock64 dest=/etc/sudoers.d/rock64
+
+- name: disable swap
+  become: yes
+  command: swapoff --all
+  ignore_errors: yes
+
+- name: disable swap on startup
+  become: yes
+  lineinfile:
+    path: /etc/rc.local
+    state: present
+    line: '/sbin/swapoff --all'
+    insertbefore: '^exit 0$'

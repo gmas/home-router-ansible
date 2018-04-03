@@ -11,3 +11,7 @@ lights.home.masgras.us
 bigbox.home.masgras.us
 [kvm-host:vars]
 ansible_python_interpreter=/usr/bin/python3
+
+[rock64]
+192.168.20.128
+192.168.20.129
