@@ -1,18 +1,13 @@
 ---
-- name: Google cloud APT key
+- name: reset machine-id if specified
   become: yes
-  apt_key:
-    url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
-    state: present
+  shell: |
+    rm /etc/machine-id && /bin/systemd-machine-id-setup
+  when: reset_machine_id
 
-- name: apt update
+- name: disable eth1
   become: yes
-  apt:
-    update_cache: yes
-
-- name: add rock64 to sudoers
-  become: yes
-  copy: src=sudoers-rock64 dest=/etc/sudoers.d/rock64
+  copy: src=interfaces-eth1 dest=/etc/network/interfaces.d/eth1
 
 - name: disable swap
   become: yes
@@ -26,3 +21,35 @@
     state: present
     line: '/sbin/swapoff --all'
     insertbefore: '^exit 0$'
+
+- name: add rock64 to sudoers
+  become: yes
+  copy: src=sudoers-rock64 dest=/etc/sudoers.d/rock64
+
+- name: Google cloud APT key
+  become: yes
+  apt_key:
+    url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+    state: present
+
+- name: apt update
+  become: yes
+  apt:
+    update_cache: yes
+
+- name: install NFS common
+  become: yes
+  apt:
+    name: nfs-common
+    state: present
+
+- name: Mount NAS
+  become: yes
+  mount:
+    src: "nas.home.masgras.us:/nas"
+    name: "/mnt/nas"
+    # path: /nas/nas
+    fstype: nfs
+    opts: "rw,nosuid,nodev"
+    state: mounted
+
