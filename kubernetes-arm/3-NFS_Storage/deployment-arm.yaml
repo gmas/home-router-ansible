@@ -1,0 +1,44 @@
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  name: nfs-client-provisioner
+spec:
+  replicas: 2
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: nfs-client-provisioner
+    spec:
+      serviceAccount: nfs-client-provisioner
+      containers:
+        - name: nfs-client-provisioner
+          image: quay.io/external_storage/nfs-client-provisioner-arm:latest
+          volumeMounts:
+            - name: nfs-client-root
+              mountPath: /persistentvolumes
+          env:
+            - name: PROVISIONER_NAME
+              value: fuseim.pri/nas
+            - name: NFS_SERVER
+              value: nas.home.masgras.us
+            - name: NFS_PATH
+              value: /nas/k8s
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: role
+                  operator: In
+                  values:
+                  - data
+              topologyKey: kubernetes.io/hostname
+      volumes:
+        - name: nfs-client-root
+          nfs:
+            server: nas.home.masgras.us
+            path: /nas/k8s
