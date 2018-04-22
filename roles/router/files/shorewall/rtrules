@@ -10,5 +10,6 @@
 #adding rules after priority 999 (lookup main) in order to not affect routing to local or other tun
 lo			-			twc		1000
 192.168.20.80		-			tz_rom		11000
-192.168.20.128/27		-			tz_rom		11001
+192.168.20.128/27	-			tz_rom		11001
 br0			-			twc		11010
+docker0			-		twc		11011
