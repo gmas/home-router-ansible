@@ -1,0 +1,83 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: sabnzbd
+  labels:
+    app: sabnzbd
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sabnzbd
+  template:
+    metadata:
+      labels:
+        app: sabnzbd
+    spec:
+      containers:
+        - image: gmas/sabnzbd-aarch64
+          name: sabnzbd
+          ports:
+            - containerPort: 8080
+              name: admin
+            - containerPort: 9090
+              name: admin-tls
+          volumeMounts:
+            # - name: wordpress-persistent-storage
+            #   mountPath: /var/www/html
+            - name: sabnzbd-config
+              mountPath: /config/sabnzbd.ini
+              subPath: sabnzbd.ini
+            - name: nas-complete
+              mountPath: /nas/incoming/complete
+            - name: nas-tmp
+              mountPath: /nas/incoming/tmp
+      volumes:
+        - name: sabnzbd-config
+          configMap:
+            name: sabnzbd-config
+        - name: nas-complete
+          hostPath:
+            path: /mnt/nas/incoming/complete
+        - name: nas-tmp
+          hostPath:
+            path: /mnt/nas/incoming/tmp
+          
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: sabnzbd-service
+  namespace: default
+  labels:
+    app: sabnzbd
+spec:
+  selector:
+    app: sabnzbd
+  ports:
+    - protocol: TCP
+      port: 443
+      targetPort: admin-tls
+      name: admin-tls
+    - protocol: TCP
+      port: 80
+      targetPort: admin
+      name: admin
+  type: LoadBalancer
+  # loadBalancerIP: 192.168.20.160
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: sabnzbd-lb
+  namespace: default
+spec:
+  rules:
+  - host: sabnzbd.k8s.home.masgras.us
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: sabnzbd-service
+          servicePort: admin
