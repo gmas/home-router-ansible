@@ -1,3 +1,7 @@
+kind: ConfigMap
+metadata:
+  name:  sabnzbd-config
+  namespace: default
 apiVersion: v1
 data:
   sabnzbd.ini: |
@@ -351,4 +355,4 @@ data:
     script = None
     newzbin = ""
     dir = ""
-kind: ConfigMap
+
