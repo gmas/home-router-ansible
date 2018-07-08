@@ -3,5 +3,5 @@ kind: StorageClass
 metadata:
   name: nfs-nas
   annotations:
-    storageclass.kubernetes.io/is-default-class: true
+    storageclass.kubernetes.io/is-default-class: "true"
 provisioner: fuseim.pri/nas # or choose another name, must match deployment's env PROVISIONER_NAME'
