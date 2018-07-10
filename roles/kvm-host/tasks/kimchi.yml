@@ -1,0 +1,87 @@
+# - name: Install Kimchi runtime dependencies
+#   apt:
+#     name: "{{ packages }}"
+#     update_cache: yes
+#   vars:
+#     packages:
+#       - python-configobj
+#       - novnc
+#       - python-libvirt
+#       - libvirt-bin
+#       - nfs-common
+#       - python-parted
+#       - python-ethtool
+#       - sosreport
+#       - python-ipaddr
+#       - python-lxml
+#       - open-iscsi
+#       - python-guestfs
+#       - libguestfs-tools
+#       - spice-html5
+#       - python-magic
+#       - python-paramiko
+#       - python-pil
+#       - fonts-font-awesome
+#       - geoip-database
+#       - gettext
+#       - nginx-light
+#       - python-cheetah
+#       - python-cherrypy3
+#       - python-ldap
+#       - python-m2crypto
+#       - python-pam
+
+# - name: Install Kimchi build dependencies
+#   apt:
+#     name: "{{ packages }}"
+#     update_cache: yes
+#   vars:
+#     packages:
+      # - gcc
+      # - make
+      # - autoconf
+      # - automake
+      # - gettext
+      # - git
+      # - pkgconf
+      # - xsltproc
+
+# - name: "Download {{ pkg_name }}"
+#   get_url: 
+#     url={{ url }}
+#     dest="/home/{{ ansible_ssh_user }}/{{ pkg_name }}"
+#   vars:
+#     pkg_name: "wok-2.5.0-0.noarch.deb"
+#     url: "https://github.com/kimchi-project/kimchi/releases/download/2.5.0/{{ pkg_name }}"
+
+# - name: "Download {{ pkg_name }}"
+#   get_url: 
+#     url={{ url }}
+#     dest="/home/{{ ansible_ssh_user }}/{{ pkg_name }}"
+#   vars:
+#     pkg_name: "kimchi-2.5.0-0.noarch.deb"
+#     url: "https://github.com/kimchi-project/kimchi/releases/download/2.5.0/{{ pkg_name }}"
+
+
+# - name: copy {{ pkg_name }}"
+#   copy: src="{{ pkg_name }}" dest="/home/{{ ansible_ssh_user }}/{{ pkg_name }}"  
+#   vars:
+#     pkg_name: "kimchi-2.5.0-0-pil.noarch.deb"
+
+# - name: copy "{{ pkg_name }}"
+#   copy: src="{{ pkg_name }}" dest="/home/{{ ansible_ssh_user }}/{{ pkg_name }}"  
+#   vars:
+#     pkg_name: "wok-2.5.0-0.noarch.deb"
+
+# - name: "Install {{ pkg_name }}"
+#   apt: deb="/home/{{ ansible_ssh_user }}/{{ pkg_name }}"
+#   become: true
+#   vars:
+#     pkg_name: "wok-2.5.0-0.noarch.deb"
+    
+# - name: "Install {{ pkg_name }}"
+#   apt: deb="/home/{{ ansible_ssh_user }}/{{ pkg_name }}"
+#   become: true
+#   vars:
+#     pkg_name: "kimchi-2.5.0-0-pil.noarch.deb"
+    

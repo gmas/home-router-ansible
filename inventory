@@ -7,3 +7,8 @@ home.masgras.us
 nas.home.masgras.us
 lights.home.masgras.us
 192.168.20.253
+
+[kvm-host]
+bigbox.home.masgras.us
+[kvm-host:vars]
+ansible_python_interpreter=/usr/bin/python3

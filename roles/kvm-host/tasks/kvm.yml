@@ -1,0 +1,17 @@
+- name: Install KVM packages
+  apt:
+    name: "{{ packages }}"
+    update_cache: yes
+  vars:
+    packages:
+    - qemu-kvm
+    - libvirt-bin
+    - virt-manager
+    - bridge-utils
+    - cloud-image-utils
+
+- name: Add Ansible user to kvm group 
+  user:
+    name: "{{ ansible_ssh_user }}"
+    append: yes
+    groups: kvm
