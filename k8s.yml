@@ -1,0 +1,8 @@
+---
+- name: k8s-host
+  hosts: [k8s]
+  become: yes
+  vars:
+  - ansible_ssh_user: ubuntu
+  roles:
+    - k8s

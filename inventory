@@ -12,3 +12,10 @@ lights.home.masgras.us
 bigbox.home.masgras.us
 [kvm-host:vars]
 ansible_python_interpreter=/usr/bin/python3
+
+
+[k8s]
+k8s-master.home.masgras.us
+k8s-node1.home.masgras.us
+[k8s:vars]
+ansible_python_interpreter=/usr/bin/python3
