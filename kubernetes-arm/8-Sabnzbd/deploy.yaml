@@ -23,19 +23,16 @@ spec:
             - containerPort: 9090
               name: admin-tls
           volumeMounts:
-            # - name: wordpress-persistent-storage
-            #   mountPath: /var/www/html
-            - name: sabnzbd-config
+            - name: nas-sabnzbd
               mountPath: /config/sabnzbd.ini
-              subPath: sabnzbd.ini
             - name: nas-complete
               mountPath: /nas/incoming/complete
             - name: nas-tmp
               mountPath: /nas/incoming/tmp
       volumes:
-        - name: sabnzbd-config
-          configMap:
-            name: sabnzbd-config
+        - name: nas-sabnzbd
+          hostPath:
+            path: /mnt/nas/incoming/sabnzbd.ini
         - name: nas-complete
           hostPath:
             path: /mnt/nas/incoming/complete
@@ -65,7 +62,6 @@ spec:
       targetPort: admin
       name: admin
   type: LoadBalancer
-  # loadBalancerIP: 192.168.20.160
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
