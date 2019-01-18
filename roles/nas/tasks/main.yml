@@ -1,0 +1,27 @@
+# RAID mount #
+- name: Create RAID mont dir
+  file: path=/nas state=directory mode=777 owner=root group=root
+
+- name: set mountpoints
+  become: yes
+  mount: name=/nas path=/mnt/nas src={{ mountable_share_drive | default('/dev/md/bigbox.home.masgras.us:0') }} fstype=ext4 opts=rw,relatime,data=ordered state=mounted
+
+
+# NFS #
+- name: Install nfs-utils package
+  pacman: name=nfs-utils state=present
+
+- name: Ensure nfs-server is running
+  become: yes
+  service: name=nfs-server state=started
+
+- name: copy /etc/exports
+  become: yes
+  template: src=exports.j2 dest=/etc/exports owner=root group=root
+  notify:
+    - "Restart_NFS"
+
+
+# - debug: var=vars
+#   when:
+#     - vars['ansible_hostname']=="rock64"

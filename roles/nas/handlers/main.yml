@@ -1,0 +1,4 @@
+---
+- name: "Restart_NFS"
+  become: yes
+  service: name=nfs-server state=restarted
