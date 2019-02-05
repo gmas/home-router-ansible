@@ -24,21 +24,24 @@ spec:
               name: admin-tls
           volumeMounts:
             - name: nas-sabnzbd
-              mountPath: /config/sabnzbd.ini
+              mountPath: /config
             - name: nas-complete
               mountPath: /nas/incoming/complete
             - name: nas-tmp
               mountPath: /nas/incoming/tmp
       volumes:
         - name: nas-sabnzbd
-          hostPath:
-            path: /mnt/nas/incoming/sabnzbd.ini
+          nfs:
+            server: nas.home.masgras.us
+            path: /nas/config/sabnzbd
         - name: nas-complete
-          hostPath:
-            path: /mnt/nas/incoming/complete
+          nfs:
+            server: nas.home.masgras.us
+            path: /nas/incoming/complete
         - name: nas-tmp
-          hostPath:
-            path: /mnt/nas/incoming/tmp
+          nfs:
+            server: nas.home.masgras.us
+            path: /nas/incoming/tmp
           
 
 ---
