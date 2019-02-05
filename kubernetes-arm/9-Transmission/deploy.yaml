@@ -1,0 +1,115 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: transmission
+  labels:
+    app: transmission
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: transmission
+  template:
+    metadata:
+      labels:
+        app: transmission
+    spec:
+      containers:
+        - image: lsioarmhf/transmission-aarch64:latest
+          name: transmission
+          env:
+            - name: PGID
+              value: "1000"
+            - name: PUID
+              value: "1000"
+            - name: TZ
+              value: "PST"
+          ports:
+            - containerPort: 9091
+              name: admin
+            - containerPort: 30010
+              name: p2p
+              protocol: TCP
+              hostPort: 30010
+            - containerPort: 30010
+              name: p2p2
+              protocol: UDP
+              hostPort: 30010
+          volumeMounts:
+            - name: nas-transmission-config
+              mountPath: /config
+            - name: nas-incoming
+              mountPath: /downloads
+            - name: nas-transmission-watch
+              mountPath: /watch
+      volumes:
+        - name: nas-transmission-config
+          nfs:
+            server: nas.home.masgras.us
+            path: /nas/transmission-config
+        - name: nas-incoming
+          nfs:
+            server: nas.home.masgras.us
+            path: /nas/incoming
+        - name: nas-transmission-watch
+          nfs:
+            server: nas.home.masgras.us
+            path: /nas/incoming/tmp
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: transmission-service
+  namespace: default
+  labels:
+    app: transmission
+spec:
+  selector:
+    app: transmission
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: admin
+      name: admin
+  type: LoadBalancer
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: transmission-service-p2p
+  namespace: default
+  labels:
+    app: transmission
+spec:
+  selector:
+    app: transmission
+  ports:
+    - port: 30010
+      nodePort: 30010
+      protocol: TCP
+      targetPort: p2p
+      name: p2p
+    - port: 30010
+      nodePort: 30010
+      protocol: UDP
+      targetPort: p2p2
+      name: p2p2
+  type: NodePort
+
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: transmission-lb
+  namespace: default
+spec:
+  rules:
+  - host: transmission.k8s.home.masgras.us
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: transmission-service
+          servicePort: admin
