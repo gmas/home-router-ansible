@@ -42,14 +42,3 @@
   apt:
     name: nfs-common
     state: present
-
-- name: Mount NAS
-  become: yes
-  mount:
-    src: "nas.home.masgras.us:/nas"
-    name: "/mnt/nas"
-    # path: /nas/nas
-    fstype: nfs
-    opts: "rw,nosuid,nodev"
-    state: mounted
-
