@@ -1,18 +1,18 @@
 # Generates /var/lib/dhcpcd/dhcpcd-tun1.info when connecting
 - name: copy openvpn OpenVPN gateway script
   become: yes
-  copy: src="openvpn/save_gateway.rb" 
+  copy: src="openvpn/save_gateway.rb"
         dest=/etc/openvpn/save_gateway.rb
 
 # Used by Shorewall to determine VPN gateway
-- shell: stat -c %a /var/lib/dhcpcd/dhcpcd-tun1.info
-  register: dhcpcd_tun1
+- shell: stat -c %a /var/lib/dhcpcd/dhcpcd-tun0.info
+  register: dhcpcd_tun0
   changed_when: False
-  always_run: yes
+  check_mode: no
 
-- name: create tun1 lease info file 
+- name: create tun1 lease info file
   file: path=/var/lib/dhcpcd/dhcpcd-tun1.info owner=root group=root mode=0664 state=touch
-  when: dhcpcd_tun1.stdout != "664"
+  when: dhcpcd_tun0.stdout != "664"
 
 # Copy override Shorewall configs requiring Openvpn services
 - name: copy shorewall service override configs
@@ -21,4 +21,3 @@
         dest=/etc/systemd/system/shorewall.service.d/override.conf
   notify:
     - "Restart_Shorewall"
-

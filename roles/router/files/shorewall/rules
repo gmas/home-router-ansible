@@ -32,6 +32,9 @@ DNS(ACCEPT)	loc		$FW
 #
 SSH(ACCEPT)	loc		$FW
 SSH(ACCEPT)	net		$FW		TCP	22
+#Accept uPnP connections from $FW to the local network for DLNA 
+#
+ACCEPT		$FW		loc		UDP	-	1900
 #
 #Allow Ping from the local network
 #
@@ -42,6 +45,7 @@ Ping(ACCEPT)	loc		$FW
 #
 
 Ping(DROP)	net		$FW
+DROP		loc:192.168.20.128/27		net:eth1
 
 #Accept local pings
 ACCEPT		$FW		loc		icmp
@@ -50,5 +54,7 @@ ACCEPT		$FW		net		icmp
 #Port forwarding
 DNAT		net		loc:192.168.20.81 tcp	8080
 DNAT		loc		loc:192.168.20.81 tcp	8080
+DNAT		net:tun0		loc:192.168.20.128 tcp	30010
+DNAT		net:tun0		loc:192.168.20.128 udp	30010
 
 DROP		loc:192.168.20.128/27		net:eth1

@@ -12,4 +12,6 @@ lo			-			twc		1000
 192.168.20.80		-			tz_rom		11000
 192.168.20.128/27	-			tz_rom		11001
 br0			-			twc		11010
+eth0			-			twc		11010
+eth2			-			twc		11010
 docker0			-		twc		11011

@@ -10,4 +10,4 @@
 - name: enable br0
   become: yes
   shell: netctl enable br0
-  when: br0_enabled|failed
+  when: 'br0_enabled is failed'
