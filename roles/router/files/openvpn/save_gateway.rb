@@ -1,12 +1,13 @@
 #!/bin/env ruby
 # saves IP as gateway in dhcpcd client format
 # used by Shorewall to 'detect' provider gateway
-#echo "GATEWAYS=$5" > /var/lib/dhcpcd/dhcpcd-tun0.info
+#echo "GATEWAYS=$3" > /var/lib/dhcpcd/dhcpcd-#{interface}.info
 gateway = ARGF.argv[3]
-File.open("/var/lib/dhcpcd/dhcpcd-tun0.info", "r+") do |f|
+interface= ARGF.argv[0]
+File.open("/var/lib/dhcpcd/dhcpcd-#{interface}.info", "w+") do |f|
   f.truncate(0)
   f.write "GATEWAYS=#{gateway}"
 end
 
 # reload shorewall
-system("/usr/bin/shorewall restart")
+system("/usr/bin/shorewall reload")
