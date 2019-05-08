@@ -1,0 +1,56 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: sonarr
+  labels:
+    app: sonarr
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sonarr
+  template:
+    metadata:
+      labels:
+        app: sonarr
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/master
+                operator: DoesNotExist
+      containers:
+        - image: linuxserver/sonarr:arm64v8-latest
+          name: sonarr
+          env:
+            - name: PGID
+              value: "1000"
+            - name: PUID
+              value: "1000"
+            - name: TZ
+              value: "PST"
+          ports:
+            - containerPort: 8989
+              name: admin
+          volumeMounts:
+            - name: nas-sonarr-config
+              mountPath: /config
+            - name: nas-downloads
+              mountPath: /downloads
+            - name: nas-sonarr-tv
+              mountPath: /tv
+      volumes:
+        - name: nas-sonarr-config
+          nfs:
+            server: nas.home.masgras.us
+            path: /nas/config/sonarr
+        - name: nas-downloads
+          nfs:
+            server: nas.home.masgras.us
+            path: /nas/incoming/complete
+        - name: nas-sonarr-tv
+          nfs:
+            server: nas.home.masgras.us
+            path: /nas/incoming/tv

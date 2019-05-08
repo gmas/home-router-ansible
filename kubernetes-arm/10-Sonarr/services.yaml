@@ -1,0 +1,32 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: sonarr-service
+  namespace: default
+  labels:
+    app: sonarr
+spec:
+  selector:
+    app: sonarr
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: admin
+      name: admin
+  type: LoadBalancer
+
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: sonarr-lb
+  namespace: default
+spec:
+  rules:
+  - host: sonarr.k8s.home.masgras.us
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: sonarr-service
+          servicePort: admin
