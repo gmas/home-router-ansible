@@ -16,30 +16,6 @@ spec:
   type: LoadBalancer
 
 ---
-kind: Service
-apiVersion: v1
-metadata:
-  name: transmission-service-p2p
-  namespace: default
-  labels:
-    app: transmission
-spec:
-  selector:
-    app: transmission
-  ports:
-    - port: 30010
-      nodePort: 30010
-      protocol: TCP
-      targetPort: p2p
-      name: p2p
-    - port: 30010
-      nodePort: 30010
-      protocol: UDP
-      targetPort: p2p2
-      name: p2p2
-  type: NodePort
-
----
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
