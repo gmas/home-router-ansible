@@ -46,7 +46,7 @@ spec:
         - name: nas-transmission-config
           nfs:
             server: nas.home.masgras.us
-            path: /nas/transmission-config
+            path: /nas/config/transmission
         - name: nas-incoming
           nfs:
             server: nas.home.masgras.us
@@ -55,4 +55,3 @@ spec:
           nfs:
             server: nas.home.masgras.us
             path: /nas/incoming/tmp
-
