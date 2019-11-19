@@ -42,8 +42,11 @@ spec:
            containerPort: 8080
         args:
         - --api
-        - --kubernetes
+        #- --kubernetes
+        - --providers.kubernetesingress=true
+          #- --providers.kubernetescrd
         - --configfile=/config/traefik.toml
+        - --log.level=debug
         livenessProbe:
           httpGet:
             path: /ping
