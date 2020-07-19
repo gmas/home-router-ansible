@@ -1,0 +1,46 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  namespace: default
+  name: traefik
+  labels:
+    app: traefik
+
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: traefik
+  template:
+    metadata:
+      labels:
+        app: traefik
+    spec:
+      serviceAccountName: traefik-ingress-controller
+      containers:
+        - name: traefik
+          image: traefik:v2.0.1
+          resources:
+            limits:
+              memory: "256Mi"
+              cpu: "200m"
+          args:
+            - --api
+            - --api.dashboard=true
+            - --api.insecure=true
+            - --api.debug=true
+            - --ping
+            - --accesslog=true
+            - --log=true
+            - --log.level=debug
+            - --entrypoints.web.Address=:8000
+            - --entrypoints.web.forwardedheaders.insecure=true
+            - --entrypoints.https=false
+            - --providers.kubernetescrd=true
+            - --providers.kubernetesingress=true
+            - --serverstransport.insecureskipverify=true
+          ports:
+            - name: web
+              containerPort: 8000
+            - name: admin
+              containerPort: 8080
