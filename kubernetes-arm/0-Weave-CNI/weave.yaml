@@ -9,15 +9,15 @@ items:
         cloud.weave.works/launcher-info: |-
           {
             "original-request": {
-              "url": "/k8s/net?k8s-version=Q2xpZW50IFZlcnNpb246IHZlcnNpb24uSW5mb3tNYWpvcjoiMSIsIE1pbm9yOiI5IiwgR2l0VmVyc2lvbjoidjEuOS4zIiwgR2l0Q29tbWl0OiJkMjgzNTQxNjU0NGYyOThjOTE5ZTJlYWQzYmUzZDA4NjRiNTIzMjNiIiwgR2l0VHJlZVN0YXRlOiJjbGVhbiIsIEJ1aWxkRGF0ZToiMjAxOC0wMi0wN1QxMjoyMjoyMVoiLCBHb1ZlcnNpb246ImdvMS45LjIiLCBDb21waWxlcjoiZ2MiLCBQbGF0Zm9ybToibGludXgvYW1kNjQifQpTZXJ2ZXIgVmVyc2lvbjogdmVyc2lvbi5JbmZve01ham9yOiIxIiwgTWlub3I6IjkiLCBHaXRWZXJzaW9uOiJ2MS45LjciLCBHaXRDb21taXQ6ImRkNWUxYTI5NzhmZDBiOTdkOWI3OGUxNTY0Mzk4YWVlYTdlN2ZlOTIiLCBHaXRUcmVlU3RhdGU6ImNsZWFuIiwgQnVpbGREYXRlOiIyMDE4LTA0LTE4VDIzOjU4OjM1WiIsIEdvVmVyc2lvbjoiZ28xLjkuMyIsIENvbXBpbGVyOiJnYyIsIFBsYXRmb3JtOiJsaW51eC9hcm02NCJ9Cg==",
-              "date": "Wed May 09 2018 19:55:43 GMT+0000 (UTC)"
+              "url": "/k8s/v1.16/net.yaml?k8s-version=1.18",
+              "date": "Sun Jul 19 2020 04:52:44 GMT+0000 (UTC)"
             },
             "email-address": "support@weave.works"
           }
       labels:
         name: weave-net
       namespace: kube-system
-  - apiVersion: rbac.authorization.k8s.io/v1beta1
+  - apiVersion: rbac.authorization.k8s.io/v1
     kind: ClusterRole
     metadata:
       name: weave-net
@@ -25,8 +25,8 @@ items:
         cloud.weave.works/launcher-info: |-
           {
             "original-request": {
-              "url": "/k8s/net?k8s-version=Q2xpZW50IFZlcnNpb246IHZlcnNpb24uSW5mb3tNYWpvcjoiMSIsIE1pbm9yOiI5IiwgR2l0VmVyc2lvbjoidjEuOS4zIiwgR2l0Q29tbWl0OiJkMjgzNTQxNjU0NGYyOThjOTE5ZTJlYWQzYmUzZDA4NjRiNTIzMjNiIiwgR2l0VHJlZVN0YXRlOiJjbGVhbiIsIEJ1aWxkRGF0ZToiMjAxOC0wMi0wN1QxMjoyMjoyMVoiLCBHb1ZlcnNpb246ImdvMS45LjIiLCBDb21waWxlcjoiZ2MiLCBQbGF0Zm9ybToibGludXgvYW1kNjQifQpTZXJ2ZXIgVmVyc2lvbjogdmVyc2lvbi5JbmZve01ham9yOiIxIiwgTWlub3I6IjkiLCBHaXRWZXJzaW9uOiJ2MS45LjciLCBHaXRDb21taXQ6ImRkNWUxYTI5NzhmZDBiOTdkOWI3OGUxNTY0Mzk4YWVlYTdlN2ZlOTIiLCBHaXRUcmVlU3RhdGU6ImNsZWFuIiwgQnVpbGREYXRlOiIyMDE4LTA0LTE4VDIzOjU4OjM1WiIsIEdvVmVyc2lvbjoiZ28xLjkuMyIsIENvbXBpbGVyOiJnYyIsIFBsYXRmb3JtOiJsaW51eC9hcm02NCJ9Cg==",
-              "date": "Wed May 09 2018 19:55:43 GMT+0000 (UTC)"
+              "url": "/k8s/v1.16/net.yaml?k8s-version=1.18",
+              "date": "Sun Jul 19 2020 04:52:44 GMT+0000 (UTC)"
             },
             "email-address": "support@weave.works"
           }
@@ -51,7 +51,14 @@ items:
           - get
           - list
           - watch
-  - apiVersion: rbac.authorization.k8s.io/v1beta1
+      - apiGroups:
+          - ''
+        resources:
+          - nodes/status
+        verbs:
+          - patch
+          - update
+  - apiVersion: rbac.authorization.k8s.io/v1
     kind: ClusterRoleBinding
     metadata:
       name: weave-net
@@ -59,8 +66,8 @@ items:
         cloud.weave.works/launcher-info: |-
           {
             "original-request": {
-              "url": "/k8s/net?k8s-version=Q2xpZW50IFZlcnNpb246IHZlcnNpb24uSW5mb3tNYWpvcjoiMSIsIE1pbm9yOiI5IiwgR2l0VmVyc2lvbjoidjEuOS4zIiwgR2l0Q29tbWl0OiJkMjgzNTQxNjU0NGYyOThjOTE5ZTJlYWQzYmUzZDA4NjRiNTIzMjNiIiwgR2l0VHJlZVN0YXRlOiJjbGVhbiIsIEJ1aWxkRGF0ZToiMjAxOC0wMi0wN1QxMjoyMjoyMVoiLCBHb1ZlcnNpb246ImdvMS45LjIiLCBDb21waWxlcjoiZ2MiLCBQbGF0Zm9ybToibGludXgvYW1kNjQifQpTZXJ2ZXIgVmVyc2lvbjogdmVyc2lvbi5JbmZve01ham9yOiIxIiwgTWlub3I6IjkiLCBHaXRWZXJzaW9uOiJ2MS45LjciLCBHaXRDb21taXQ6ImRkNWUxYTI5NzhmZDBiOTdkOWI3OGUxNTY0Mzk4YWVlYTdlN2ZlOTIiLCBHaXRUcmVlU3RhdGU6ImNsZWFuIiwgQnVpbGREYXRlOiIyMDE4LTA0LTE4VDIzOjU4OjM1WiIsIEdvVmVyc2lvbjoiZ28xLjkuMyIsIENvbXBpbGVyOiJnYyIsIFBsYXRmb3JtOiJsaW51eC9hcm02NCJ9Cg==",
-              "date": "Wed May 09 2018 19:55:43 GMT+0000 (UTC)"
+              "url": "/k8s/v1.16/net.yaml?k8s-version=1.18",
+              "date": "Sun Jul 19 2020 04:52:44 GMT+0000 (UTC)"
             },
             "email-address": "support@weave.works"
           }
@@ -74,7 +81,7 @@ items:
       - kind: ServiceAccount
         name: weave-net
         namespace: kube-system
-  - apiVersion: rbac.authorization.k8s.io/v1beta1
+  - apiVersion: rbac.authorization.k8s.io/v1
     kind: Role
     metadata:
       name: weave-net
@@ -82,8 +89,8 @@ items:
         cloud.weave.works/launcher-info: |-
           {
             "original-request": {
-              "url": "/k8s/net?k8s-version=Q2xpZW50IFZlcnNpb246IHZlcnNpb24uSW5mb3tNYWpvcjoiMSIsIE1pbm9yOiI5IiwgR2l0VmVyc2lvbjoidjEuOS4zIiwgR2l0Q29tbWl0OiJkMjgzNTQxNjU0NGYyOThjOTE5ZTJlYWQzYmUzZDA4NjRiNTIzMjNiIiwgR2l0VHJlZVN0YXRlOiJjbGVhbiIsIEJ1aWxkRGF0ZToiMjAxOC0wMi0wN1QxMjoyMjoyMVoiLCBHb1ZlcnNpb246ImdvMS45LjIiLCBDb21waWxlcjoiZ2MiLCBQbGF0Zm9ybToibGludXgvYW1kNjQifQpTZXJ2ZXIgVmVyc2lvbjogdmVyc2lvbi5JbmZve01ham9yOiIxIiwgTWlub3I6IjkiLCBHaXRWZXJzaW9uOiJ2MS45LjciLCBHaXRDb21taXQ6ImRkNWUxYTI5NzhmZDBiOTdkOWI3OGUxNTY0Mzk4YWVlYTdlN2ZlOTIiLCBHaXRUcmVlU3RhdGU6ImNsZWFuIiwgQnVpbGREYXRlOiIyMDE4LTA0LTE4VDIzOjU4OjM1WiIsIEdvVmVyc2lvbjoiZ28xLjkuMyIsIENvbXBpbGVyOiJnYyIsIFBsYXRmb3JtOiJsaW51eC9hcm02NCJ9Cg==",
-              "date": "Wed May 09 2018 19:55:43 GMT+0000 (UTC)"
+              "url": "/k8s/v1.16/net.yaml?k8s-version=1.18",
+              "date": "Sun Jul 19 2020 04:52:44 GMT+0000 (UTC)"
             },
             "email-address": "support@weave.works"
           }
@@ -106,7 +113,7 @@ items:
           - configmaps
         verbs:
           - create
-  - apiVersion: rbac.authorization.k8s.io/v1beta1
+  - apiVersion: rbac.authorization.k8s.io/v1
     kind: RoleBinding
     metadata:
       name: weave-net
@@ -114,8 +121,8 @@ items:
         cloud.weave.works/launcher-info: |-
           {
             "original-request": {
-              "url": "/k8s/net?k8s-version=Q2xpZW50IFZlcnNpb246IHZlcnNpb24uSW5mb3tNYWpvcjoiMSIsIE1pbm9yOiI5IiwgR2l0VmVyc2lvbjoidjEuOS4zIiwgR2l0Q29tbWl0OiJkMjgzNTQxNjU0NGYyOThjOTE5ZTJlYWQzYmUzZDA4NjRiNTIzMjNiIiwgR2l0VHJlZVN0YXRlOiJjbGVhbiIsIEJ1aWxkRGF0ZToiMjAxOC0wMi0wN1QxMjoyMjoyMVoiLCBHb1ZlcnNpb246ImdvMS45LjIiLCBDb21waWxlcjoiZ2MiLCBQbGF0Zm9ybToibGludXgvYW1kNjQifQpTZXJ2ZXIgVmVyc2lvbjogdmVyc2lvbi5JbmZve01ham9yOiIxIiwgTWlub3I6IjkiLCBHaXRWZXJzaW9uOiJ2MS45LjciLCBHaXRDb21taXQ6ImRkNWUxYTI5NzhmZDBiOTdkOWI3OGUxNTY0Mzk4YWVlYTdlN2ZlOTIiLCBHaXRUcmVlU3RhdGU6ImNsZWFuIiwgQnVpbGREYXRlOiIyMDE4LTA0LTE4VDIzOjU4OjM1WiIsIEdvVmVyc2lvbjoiZ28xLjkuMyIsIENvbXBpbGVyOiJnYyIsIFBsYXRmb3JtOiJsaW51eC9hcm02NCJ9Cg==",
-              "date": "Wed May 09 2018 19:55:43 GMT+0000 (UTC)"
+              "url": "/k8s/v1.16/net.yaml?k8s-version=1.18",
+              "date": "Sun Jul 19 2020 04:52:44 GMT+0000 (UTC)"
             },
             "email-address": "support@weave.works"
           }
@@ -130,7 +137,7 @@ items:
       - kind: ServiceAccount
         name: weave-net
         namespace: kube-system
-  - apiVersion: extensions/v1beta1
+  - apiVersion: apps/v1
     kind: DaemonSet
     metadata:
       name: weave-net
@@ -138,8 +145,8 @@ items:
         cloud.weave.works/launcher-info: |-
           {
             "original-request": {
-              "url": "/k8s/net?k8s-version=Q2xpZW50IFZlcnNpb246IHZlcnNpb24uSW5mb3tNYWpvcjoiMSIsIE1pbm9yOiI5IiwgR2l0VmVyc2lvbjoidjEuOS4zIiwgR2l0Q29tbWl0OiJkMjgzNTQxNjU0NGYyOThjOTE5ZTJlYWQzYmUzZDA4NjRiNTIzMjNiIiwgR2l0VHJlZVN0YXRlOiJjbGVhbiIsIEJ1aWxkRGF0ZToiMjAxOC0wMi0wN1QxMjoyMjoyMVoiLCBHb1ZlcnNpb246ImdvMS45LjIiLCBDb21waWxlcjoiZ2MiLCBQbGF0Zm9ybToibGludXgvYW1kNjQifQpTZXJ2ZXIgVmVyc2lvbjogdmVyc2lvbi5JbmZve01ham9yOiIxIiwgTWlub3I6IjkiLCBHaXRWZXJzaW9uOiJ2MS45LjciLCBHaXRDb21taXQ6ImRkNWUxYTI5NzhmZDBiOTdkOWI3OGUxNTY0Mzk4YWVlYTdlN2ZlOTIiLCBHaXRUcmVlU3RhdGU6ImNsZWFuIiwgQnVpbGREYXRlOiIyMDE4LTA0LTE4VDIzOjU4OjM1WiIsIEdvVmVyc2lvbjoiZ28xLjkuMyIsIENvbXBpbGVyOiJnYyIsIFBsYXRmb3JtOiJsaW51eC9hcm02NCJ9Cg==",
-              "date": "Wed May 09 2018 19:55:43 GMT+0000 (UTC)"
+              "url": "/k8s/v1.16/net.yaml?k8s-version=1.18",
+              "date": "Sun Jul 19 2020 04:52:44 GMT+0000 (UTC)"
             },
             "email-address": "support@weave.works"
           }
@@ -148,6 +155,9 @@ items:
       namespace: kube-system
     spec:
       minReadySeconds: 5
+      selector:
+        matchLabels:
+          name: weave-net
       template:
         metadata:
           labels:
@@ -163,13 +173,12 @@ items:
                     fieldRef:
                       apiVersion: v1
                       fieldPath: spec.nodeName
-              image: 'weaveworks/weave-kube:2.2.1'
-              livenessProbe:
+              image: 'docker.io/weaveworks/weave-kube:2.6.5'
+              readinessProbe:
                 httpGet:
                   host: 127.0.0.1
                   path: /status
                   port: 6784
-                initialDelaySeconds: 30
               resources:
                 requests:
                   cpu: 10m
@@ -191,14 +200,13 @@ items:
                 - name: xtables-lock
                   mountPath: /run/xtables.lock
             - name: weave-npc
-              args: []
               env:
                 - name: HOSTNAME
                   valueFrom:
                     fieldRef:
                       apiVersion: v1
                       fieldPath: spec.nodeName
-              image: 'weaveworks/weave-npc:2.2.1'
+              image: 'docker.io/weaveworks/weave-npc:2.6.5'
               resources:
                 requests:
                   cpu: 10m
@@ -207,14 +215,18 @@ items:
               volumeMounts:
                 - name: xtables-lock
                   mountPath: /run/xtables.lock
+          dnsPolicy: ClusterFirstWithHostNet
           hostNetwork: true
           hostPID: true
+          priorityClassName: system-node-critical
           restartPolicy: Always
           securityContext:
             seLinuxOptions: {}
           serviceAccountName: weave-net
           tolerations:
             - effect: NoSchedule
+              operator: Exists
+            - effect: NoExecute
               operator: Exists
           volumes:
             - name: weavedb
@@ -238,5 +250,7 @@ items:
             - name: xtables-lock
               hostPath:
                 path: /run/xtables.lock
+                type: FileOrCreate
       updateStrategy:
         type: RollingUpdate
+
