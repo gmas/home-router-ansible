@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: radarr
+  labels:
+    app: radarr
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: radarr
+  template:
+    metadata:
+      labels:
+        app: radarr
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/master
+                operator: DoesNotExist
+      containers:
+        - image: linuxserver/radarr:arm64v8-latest
+          name: radarr
+          env:
+            - name: PGID
+              value: "1000"
+            - name: PUID
+              value: "1000"
+            - name: TZ
+              value: "PST"
+          ports:
+            - containerPort: 7878
+              name: admin
+          volumeMounts:
+            - name: nas-radarr-config
+              mountPath: /config
+            - name: nas-downloads
+              mountPath: /downloads
+            - name: nas-movies
+              mountPath: /movies
+      volumes:
+        - name: nas-radarr-config
+          nfs:
+            server: nas.home.masgras.us
+            path: /nas/config/radarr
+        - name: nas-downloads
+          nfs:
+            server: nas.home.masgras.us
+            path: /nas/incoming/complete
+        - name: nas-movies
+          nfs:
+            server: nas.home.masgras.us
+            path: /nas/incoming/complete/movies
