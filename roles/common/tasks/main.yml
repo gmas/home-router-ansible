@@ -1,2 +1,17 @@
 ---
+
+- name: add user
+  user:
+    name: "{{ admin_user }}"
+    shell: /bin/bash
+    create_home: yes
+    #system: yes
+    home: "/home/{{ admin_user }}"
+
+- name: make sure user home belongs to user
+  file:
+    path: "/home/{{ admin_user }}"
+    owner: "{{ admin_user }}"
+    group: "{{ admin_user }}"
+
 - include: ssh.yml

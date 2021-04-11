@@ -1,6 +1,26 @@
-- name: decrypt secrets file
-  include_vars: "secrets.yml"
+- name: include local vars
   no_log: true
+  include_vars:
+    dir: vars
 
-- name: copy authorized keys
-  template: src=authorized_keys.j2 dest="/home/{{ ansible_ssh_user }}/.ssh/authorized_keys" mode=0400
+- name: create .ssh dir
+  file:
+    path: "/home/{{ admin_user }}/.ssh"
+    owner: "{{ admin_user }}"
+    group: "{{ admin_user }}"
+    mode: 0700
+    state: directory
+
+# - name: create multiline string of concatenated SSH keys
+#   set_fact:
+#     ssh_keys: |-
+#       {% for item in (ssh_default_keys + ssh_extra_keys) |unique %}
+#       {{ lookup('file','public_keys/'+item) }}
+#       {% endfor %}
+
+- name: Set up multiple authorized keys
+  authorized_key:
+    user: "{{ admin_user }}"
+    state: present
+    exclusive: yes
+    key: "{{ ssh_keys }}"
