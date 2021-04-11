@@ -1,5 +1,19 @@
 ---
 
+- name: install package deps
+  pacman:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - sudo
+
+- name: allow wheel group to sudo without password
+  copy:
+    content: |
+      %wheel ALL=(ALL) NOPASSWD: ALL
+    dest: /etc/sudoers.d/wheel
+
+
 - name: add user
   user:
     name: "{{ admin_user }}"
@@ -7,6 +21,7 @@
     create_home: yes
     #system: yes
     home: "/home/{{ admin_user }}"
+    groups: wheel
 
 - name: make sure user home belongs to user
   file:
